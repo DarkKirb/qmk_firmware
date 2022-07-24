@@ -292,4 +292,7 @@ const struct decoded_key key_neo2_mapping[] = {
     {KC_RBRC, 4, DECODED_KEY_ONESHOT}, // ˝
     {KC_RBRC, 5, DECODED_KEY_ONESHOT}, // ᾿
     {KC_RBRC, 6, DECODED_KEY_ONESHOT}, // ˘
+    {KC_P9, 2, DECODED_KEY_ONESHOT},   // →
+
+    {KC_NLCK, 2, DECODED_KEY_ONESHOT}, //  leftwards tab
 };

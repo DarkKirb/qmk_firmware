@@ -269,7 +269,7 @@ enum custom_keycodes {
     DIAMOND,            // ♦
     FEMALE,             // ♀
     MALE,               // ♂
-    MALEFEM,             // ⚥
+    MALEFEM,            // ⚥
     CHECKMK,            // ✔
     XBALLOT,            // ✘
     LANGLE,             // ⟨
@@ -294,10 +294,13 @@ enum custom_keycodes {
     DBLACUT,          // ˝
     SPLENIS,          // ᾿
     BREVE,            // ˘
+    VECTARR,          // →
+
+    // Miscellaneous
+    LEFTTAB, // tab but backwards
 
     COMPOSE,
     PASTHRU,
-    NUMPAD,
     STENO,
     LLOCK,
     NEO2,
@@ -470,7 +473,7 @@ static void tap_on_layer(uint16_t key, uint8_t layer) {
     }
 }
 
-enum layers { _L1, _L2, _L3, _L4, _L5, _L6, _L7, _L8, _L9, FN };
+enum layers { _L1, _L2, _L3, _L4, _L5, _L6, _L7, _L8, _L9, FN, KP1, KP2, KP3 };
 
 #define LSHCTL S(KC_LCTL)
 #define LSHGUI S(KC_LGUI)
@@ -493,63 +496,63 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         COMPOSE, X,       V,       L,       C,       W,       K,       H,       G,       F,       Q,       SZLIG,
         CIRCUM,  U,       I,       A,       E,       O,       S,       N,       R,       T,       D,       Y,
         DIARESS, U_DIA,   O_DIA,   A_DIA,   P,       Z,       B,       M,       COMMA,   PERIOD,  J,       XXXXXXX,
-        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           TT(_L6), TT(_L2), TT(_L3), KC_SPC,                    TT(_L7), TT(_L4), TT(_L5), KC_SPC
     ),
     [_L2] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, CX,      CV,      CL,      CC,      CW,      CK,      CH,      CG,      CF,      CQ,      CSZLIG,
         HACEK,   CU,      CI,      CA,      CE,      CO,      CS,      CN,      CR,      CT,      CD,      CY,
         SPASPER, CU_DIA,  CO_DIA,  CA_DIA,  CP,      CZ,      CB,      CM,      ENDASH,  BULLET,  CJ,      XXXXXXX,
-        LSHCTL,  OSL(FN), LSHGUI,  LSHALT,  PASTHRU, NUMPAD,  STENO,   LLOCK,   RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
+        LSHCTL,  OSL(FN), LSHGUI,  LSHALT,  PASTHRU, TG(KP1), STENO,   LLOCK,   RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
                           TT(_L6), TT(_L2), TT(_L6), KC_SPC,                    XXXXXXX, XXXXXXX, TT(_L8), KC_SPC
     ),
     [_L3] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, ELLIPS,  LOWLINE, LBRACKT, RBRACKT, ACIRCUM, EXCLAM,  LESSTHN, GREATER, EQUALS,  AMPSAND, LONG_S,
         DOTABVE, BSLASH,  FSLASH,  LBRACE,  RBRACE,  ASTERSK, QUESTN,  LPARENS, RPARENS, HYPHMIN, COLON,   AT,
         ACUTE,   NUMBER,  DOLLAR,  VRTLINE, ATILDE,  AGRAVE,  PLUS,    PERCENT, QUOT,    AAPOSTR, SEMCOL,  XXXXXXX,
-        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           TT(_L6), TT(_L6), TT(_L3), KC_SPC,                    TT(_L7), TT(_L7), XXXXXXX, KC_SPC
     ),
     [_L4] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_PGDN, INVEXCL, SEVEN,   EIGHT,   NINE,    PLUS,    MINUS,
         DOTBLOW, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  INVQMRK, FOUR,    FIVE,    SIX,     COMMA,   PERIOD,
         SOLIDUS, KC_ESC,  KC_TAB,  KC_PSTE, KC_ENT,  KC_UNDO, COLON,   ONE,     TWO,     THREE,   SEMCOL,  KC_RSFT,
-        RLTCTL,  OSL(FN), RLTGUI,  RLTALT,  PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
+        RLTCTL,  OSL(FN), RLTGUI,  RLTALT,  PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
                           XXXXXXX, XXXXXXX, TT(_L7), ZERO,                      TT(_L7), TT(_L4), TT(_L9), ZERO
     ),
     [_L5] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, ONE,     TWO,     THREE,   FOUR,    FIVE,    SIX,     SEVEN,   EIGHT,   NINE,    ZERO,    HYPHMIN,
         CEDILLE, DEGREE,  SECTION, SCRIPTL, RDGUILM, LDGUILM, DOLLAR,  EURO,    LODQUOT, LDQUOT,  RDQUOT,  EMDASH,
         SPLENIS, SUPONE,  SUPTWO,  SUPTHRE, RSGUILM, LSGUILM, CENTSGN, YEN,     LOSQUOT, LSQUOT,  RSQUOT,  HYPHMIN,
-        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           XXXXXXX, TT(_L8), XXXXXXX, KC_SPC,                    TT(_L9), XXXXXXX, TT(_L5), KC_SPC
     ),
     [_L6] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, XI,      XXXXXXX, LAMBDA,  CHI,     OMEGA,   KAPPA,   PSI,     GAMMA,   PHI,     VARPHI,  FSIGMA,
         TURNED,  XXXXXXX, IOTA,    ALPHA,   EPSILON, OMICRON, SIGMA,   NU,      RHO,     TAU,     DELTA,   UPSILON,
         MACRON,  XXXXXXX, LUNEPS,  ETA,     PI,      ZETA,    BETA,    MU,      VARRHO,  VRTHETA, THETA,   XXXXXXX,
-        LSHCTL,  OSL(FN), LSHGUI,  LSHALT,  PASTHRU, NUMPAD,  STENO,   LLOCK,   RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
+        LSHCTL,  OSL(FN), LSHGUI,  LSHALT,  PASTHRU, TG(KP1), STENO,   LLOCK,   RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
                           TT(_L6), TT(_L6), TT(_L6), KC_SPC,                    XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC
     ),
     [_L7] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, CXI,     SQRT,    CLAMBDA, COMPLEX, COMEGA,  MULTSGN, CPSI,    CGAMMA,  CPHI,    RATIONL, RINGOP,
         HOOK,    SUBSET,  INTEGRL, FORALL,  THREXST, ELEMOF,  CSIGMA,  NATURAL, REAL,    PARTDRV, CDELTA,  NABLA,
         TILDE,   UNION,   INTRSCT, ALEF,    CPI,     INTEGER, LDBLARR, LRDBARR, RDBLARR, RARRBAR, CTHETA,  XXXXXXX,
-        RLTCTL,  OSL(FN), RLTGUI,  RLTALT,  PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
+        RLTCTL,  OSL(FN), RLTGUI,  RLTALT,  PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
                           XXXXXXX, XXXXXXX, TT(_L7), KC_SPC,                    TT(_L7), TT(_L7), XXXXXXX, KC_SPC
     ),
     [_L8] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, FEMORD,  MASCORD, NUMERO,  XXXXXXX, MIDDOT,  POUND,   CURENCY, KC_TAB,  FSLASH,  ASTERSK, HYPHMIN,
         RING,    SUBONE,  SUBTWO,  SUBTHRE, FEMALE,  MALE,    MALEFEM, VARKPPA, LANGLE,  RANGLE,  SUBZERO, NBHYP,
         BREVE,   NOTSIGN, LOR,     LAND,    UPTACK,  MEASANG, PARALLL, RIGHTAR, INFINIT, PROPTO,  EMPTYST, SHYPHEN,
-        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           XXXXXXX, TT(_L8), XXXXXXX, KC_SPC,                    XXXXXXX, XXXXXXX, TT(_L8), KC_SPC
     ),
     [_L9] = LAYOUT_ortho_4x6_2x2uc(
         COMPOSE, XXXXXXX, KC_BTN1, KC_MS_U, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN3, KC_WH_U, KC_BTN4, XXXXXXX,
         GRAVE,   XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN6, KC_WH_D, KC_BTN5, XXXXXXX,
         DBLACUT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, NUMPAD,  STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, OSL(FN), KC_LGUI, KC_LALT, PASTHRU, TG(KP1), STENO,   LLOCK,   KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,                    TT(_L9), XXXXXXX, TT(_L9), KC_SPC
     ),
     [FN] = LAYOUT_ortho_4x6_2x2uc(
@@ -558,7 +561,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QWERTZ,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-    )
+    ),
+    [KP1] = LAYOUT_ortho_4x6_2x2uc(
+        KC_NLCK, KC_TAB,  KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX, XXXXXXX, LEFTTAB, FSLASH,  ASTERSK, HYPHMIN, XXXXXXX,
+        XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, XXXXXXX, XXXXXXX, CHECKMK, XBALLOT, DAGGER,  PLUS,    XXXXXXX,
+        XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PENT, XXXXXXX, XXXXXXX, CLUBS,   EURO,    TRIBLLT, KC_PENT, XXXXXXX,
+        XXXXXXX, KC_P1,   KC_P2,   KC_P7,   KC_PDOT, TG(KP1), XXXXXXX, DIAMOND, HEART,   SPADE,   PERIOD,  XXXXXXX,
+                          TG(KP2), TG(KP3), KC_P0,   KC_P0,                     TG(KP2), TG(KP3), OPNBOX,  OPNBOX
+    ),
+    [KP2] = LAYOUT_ortho_4x6_2x2uc(
+        XXXXXXX, EQUALS,  DIVSGN,  DOTOPER, MINUS,   XXXXXXX, XXXXXXX, NOTEQAL, FRACTSL, MULTSGN, SETMINS, XXXXXXX,
+        XXXXXXX, UDARROW, UPARROW, VECTARR, PLSMNS,  XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_PGUP, MINPLS,  XXXXXXX,
+        XXXXXXX, LEFTARR, COLON,   RIGHTAR, KC_PENT, XXXXXXX, XXXXXXX, KC_LEFT, XXXXXXX, KC_RGHT, KC_PENT, KC_RSFT,
+        XXXXXXX, LRARROW, DOWNARR, RLHARPO, COMMA,   TG(KP1), XXXXXXX, KC_END,  KC_DOWN, KC_PGDN, KC_DEL,  XXXXXXX,
+                          TG(KP2), TG(KP3), PERCENT, PERCENT,                   TG(KP2), TG(KP3), KC_PSTE, KC_PSTE
+    ),
+    [KP3] = LAYOUT_ortho_4x6_2x2uc(
+        XXXXXXX, ALMSTEQ, DIAMETR, CDOT,    CMINUS,  XXXXXXX, XXXXXXX, IDENTCL, DIVIDES, CTIMES,  DOTMINS, XXXXXXX,
+        XXXXXXX, MCHLESS, INTRSCT, MCHGRTR, CPLUS,   XXXXXXX, XXXXXXX, LCEILNG, NARYINT, RCEILNG, DOTPLUS, XXXXXXX,
+        XXXXXXX, SUBSET,  ORIGNAL, SUPRSET, KC_PENT, XXXXXXX, XXXXXXX, SUBEQL,  IMAGEOF, SUPREQL, KC_PENT, XXXXXXX,
+        XXXXXXX, LEQUAL,  UNION,   GEQUAL,  PRIME,   TG(KP1), XXXXXXX, LFLOOR,  NARYUNI, RFLOOR,  DPRIME,  XXXXXXX,
+                          TG(KP2), TG(KP3), PERMILL, PERMILL,                   TG(KP2), TG(KP3), WHTSQAR, WHTSQAR
+    ),
 };
 // clang-format on
 

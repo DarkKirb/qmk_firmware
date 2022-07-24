@@ -118,7 +118,6 @@ const struct sparse_decoded_key key_qwertz_sparse_mapping[] = {{NBSPACE, {KC_SPC
                                                                {INVQMRK, {KC_6, 4, 0}},    // ¿
                                                                {CA_DIA, {KC_QUOT, 2, 0}},  // Ä
                                                                {CO_DIA, {KC_SCLN, 2, 0}},  // Ö
-                                                               {MULTSGN, {KC_GRV, 4, 0}},  // ×
                                                                {CU_DIA, {KC_LBRC, 2, 0}},  // Ü
                                                                {SZLIG, {KC_MINS, 1, 0}},   // ß
                                                                {A_DIA, {KC_QUOT, 1, 0}},   // ä
