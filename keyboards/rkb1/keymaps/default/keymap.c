@@ -2,169 +2,38 @@
 #include "keymap_steno.h"
 #include "keymap.h"
 
-static void register_layer1(uint16_t key) {
-    register_code16(key);
-}
-static void register_layer2(uint16_t key) {
-    register_code16(S(key));
-}
-static void register_layer3(uint16_t key) {
-    register_code(KC_CAPS_LOCK);
-    register_code16(key);
-}
-static void register_layer4(uint16_t key) {
-    register_code(KC_RALT);
-    register_code16(key);
-}
-static void register_layer5(uint16_t key) {
-    register_code(KC_CAPS_LOCK);
-    register_code16(S(key));
-}
-static void register_layer6(uint16_t key) {
-    register_code(KC_CAPS_LOCK);
-    register_code(KC_RALT);
-    register_code16(key);
-}
-static void tap_layer4(uint16_t key);
-static void register_layer7(uint16_t key) {
-    tap_layer4(KC_GRV);
-    register_code16(key);
-}
-static void unregister_layer1(uint16_t key) {
-    unregister_code16(key);
-}
-static void unregister_layer2(uint16_t key) {
-    unregister_code16(S(key));
-}
-static void unregister_layer3(uint16_t key) {
-    unregister_code(KC_CAPS_LOCK);
-    unregister_code16(key);
-}
-static void unregister_layer4(uint16_t key) {
-    unregister_code(KC_RALT);
-    unregister_code16(key);
-}
-static void unregister_layer5(uint16_t key) {
-    unregister_code(KC_CAPS_LOCK);
-    unregister_code16(S(key));
-}
-static void unregister_layer6(uint16_t key) {
-    unregister_code(KC_CAPS_LOCK);
-    unregister_code(KC_RALT);
-    unregister_code16(key);
-}
-static void unregister_layer7(uint16_t key) {
-    unregister_code16(key);
-}
-static void tap_layer1(uint16_t key) {
-    register_layer1(key);
-    wait_ms(1);
-    unregister_layer1(key);
-}
-static void tap_layer2(uint16_t key) {
-    register_layer2(key);
-    wait_ms(1);
-    unregister_layer2(key);
-}
-static void tap_layer3(uint16_t key) {
-    register_layer3(key);
-    wait_ms(1);
-    unregister_layer3(key);
-}
-static void tap_layer4(uint16_t key) {
-    register_layer4(key);
-    wait_ms(1);
-    unregister_layer4(key);
-}
-static void tap_layer5(uint16_t key) {
-    register_layer5(key);
-    wait_ms(1);
-    unregister_layer5(key);
-}
-static void tap_layer6(uint16_t key) {
-    register_layer6(key);
-    wait_ms(1);
-    unregister_layer6(key);
-}
-static void tap_layer7(uint16_t key) {
-    tap_layer4(KC_GRV);
-    tap_code16(key);
-}
-
+static void tap_on_layer(uint16_t key, uint8_t layer);
 static void register_on_layer(uint16_t key, uint8_t layer) {
-    switch (layer) {
-        case 1:
-            register_layer1(key);
-            break;
-        case 2:
-            register_layer2(key);
-            break;
-        case 3:
-            register_layer3(key);
-            break;
-        case 4:
-            register_layer4(key);
-            break;
-        case 5:
-            register_layer5(key);
-            break;
-        case 6:
-            register_layer6(key);
-            break;
-        case 7:
-            register_layer7(key);
-            break;
+    register_code16(key);
+    if (layer == 2 || layer == 5) {
+        register_code(KC_LSHIFT);
+    }
+    if (layer == 3 || layer == 5 || layer == 6) {
+        register_code(KC_CAPS_LOCK);
+    }
+    if (layer == 4 || layer == 6) {
+        register_code(KC_RALT);
+    }
+    if (layer == 7) {
+        tap_on_layer(KC_GRV, 4);
     }
 }
 static void unregister_on_layer(uint16_t key, uint8_t layer) {
-    switch (layer) {
-        case 1:
-            unregister_layer1(key);
-            break;
-        case 2:
-            unregister_layer2(key);
-            break;
-        case 3:
-            unregister_layer3(key);
-            break;
-        case 4:
-            unregister_layer4(key);
-            break;
-        case 5:
-            unregister_layer5(key);
-            break;
-        case 6:
-            unregister_layer6(key);
-            break;
-        case 7:
-            unregister_layer7(key);
-            break;
+    unregister_code16(key);
+    if (layer == 2 || layer == 5) {
+        unregister_code(KC_LSHIFT);
+    }
+    if (layer == 3 || layer == 5 || layer == 6) {
+        unregister_code(KC_CAPS_LOCK);
+    }
+    if (layer == 4 || layer == 6) {
+        unregister_code(KC_RALT);
     }
 }
 static void tap_on_layer(uint16_t key, uint8_t layer) {
-    switch (layer) {
-        case 1:
-            tap_layer1(key);
-            break;
-        case 2:
-            tap_layer2(key);
-            break;
-        case 3:
-            tap_layer3(key);
-            break;
-        case 4:
-            tap_layer4(key);
-            break;
-        case 5:
-            tap_layer5(key);
-            break;
-        case 6:
-            tap_layer6(key);
-            break;
-        case 7:
-            tap_layer7(key);
-            break;
-    }
+    register_on_layer(key, layer);
+    wait_ms(1);
+    unregister_on_layer(key, layer);
 }
 
 enum layers { _L1, _L2, _L3, _L4, _L5, _L6, _L7, _L8, _L9, KP1, KP2, KP3, STN, FN };
