@@ -1,0 +1,320 @@
+#pragma once
+
+#include QMK_KEYBOARD_H
+
+// I don’t take constructive criticism sorry
+enum custom_keycodes {
+    SPACE = SAFE_RANGE, // " "
+    EXCLAM,             // !
+    QUOT,               // "
+    NUMBER,             // #
+    DOLLAR,             // $
+    PERCENT,            // %
+    AMPSAND,            // &
+    AAPOSTR,            // '
+    LPARENS,            // (
+    RPARENS,            // )
+    ASTERSK,            // *
+    PLUS,               // +
+    COMMA,              // ,
+    HYPHMIN,            // -
+    PERIOD,             // .
+    FSLASH,             // /
+    ZERO,               // 0
+    ONE,                // 1
+    TWO,                // 2
+    THREE,              // 3
+    FOUR,               // 4
+    FIVE,               // 5
+    SIX,                // 6
+    SEVEN,              // 7
+    EIGHT,              // 8
+    NINE,               // 9
+    COLON,              // :
+    SEMCOL,             // ;
+    LESSTHN,            // <
+    EQUALS,             // =
+    GREATER,            // >
+    QUESTN,             // ?
+    AT,                 // @
+    CA,                 // A
+    CB,                 // B
+    CC,                 // C
+    CD,                 // D
+    CE,                 // E
+    CF,                 // F
+    CG,                 // G
+    CH,                 // H
+    CI,                 // I
+    CJ,                 // J
+    CK,                 // K
+    CL,                 // L
+    CM,                 // M
+    CN,                 // N
+    CO,                 // O
+    CP,                 // P
+    CQ,                 // Q
+    CR,                 // R
+    CS,                 // S
+    CT,                 // T
+    CU,                 // U
+    CV,                 // V
+    CW,                 // W
+    CX,                 // X
+    CY,                 // Y
+    CZ,                 // Z
+    LBRACKT,            // [
+    BSLASH,             // '\'
+    RBRACKT,            // ]
+    ACIRCUM,            // ^
+    LOWLINE,            // _
+    AGRAVE,             // `
+    A,                  // a
+    B,                  // b
+    C,                  // c
+    D,                  // d
+    E,                  // e
+    F,                  // f
+    G,                  // g
+    H,                  // h
+    I,                  // i
+    J,                  // j
+    K,                  // k
+    L,                  // l
+    M,                  // m
+    N,                  // n
+    O,                  // o
+    P,                  // p
+    Q,                  // q
+    R,                  // r
+    S,                  // s
+    T,                  // t
+    U,                  // u
+    V,                  // v
+    W,                  // w
+    X,                  // x
+    Y,                  // y
+    Z,                  // z
+    LBRACE,             // {
+    VRTLINE,            // |
+    RBRACE,             // }
+    ATILDE,             // ~
+    NBSPACE,            //   (U+00A0)
+    INVEXCL,            // ¡
+    CENTSGN,            // ¢
+    POUND,              // £
+    CURENCY,            // ¤
+    YEN,                // ¥
+    SECTION,            // §
+    FEMORD,             // ª
+    LDGUILM,            // «
+    NOTSIGN,            // ¬
+    SHYPHEN,            // ­ (U+00AD)
+    DEGREE,             // °
+    PLSMNS,             // ±
+    SUPTWO,             // ²
+    SUPTHRE,            // ³
+    MIDDOT,             // ·
+    SUPONE,             // ¹
+    MASCORD,            // º
+    RDGUILM,            // »
+    INVQMRK,            // ¿
+    CA_DIA,             // Ä
+    CO_DIA,             // Ö
+    MULTSGN,            // ×
+    CU_DIA,             // Ü
+    SZLIG,              // ß
+    A_DIA,              // ä
+    O_DIA,              // ö
+    DIVSGN,             // ÷
+    U_DIA,              // ü
+    LONG_S,             // ſ
+    CGAMMA,             // Γ
+    CDELTA,             // Δ
+    CTHETA,             // Θ
+    CLAMBDA,            // Λ
+    CXI,                // Ξ
+    CPI,                // Π
+    CSIGMA,             // Σ
+    CPHI,               // Φ
+    CPSI,               // Ψ
+    COMEGA,             // Ω
+    ALPHA,              // α
+    BETA,               // β
+    GAMMA,              // γ
+    DELTA,              // δ
+    EPSILON,            // ε
+    ZETA,               // ζ
+    ETA,                // η
+    THETA,              // θ
+    IOTA,               // ι
+    KAPPA,              // κ
+    LAMBDA,             // λ
+    MU,                 // μ
+    NU,                 // ν
+    XI,                 // ξ
+    OMICRON,            // ο
+    PI,                 // π
+    RHO,                // ρ
+    FSIGMA,             // ς
+    SIGMA,              // σ
+    TAU,                // τ
+    UPSILON,            // υ
+    PHI,                // φ
+    CHI,                // χ
+    PSI,                // ψ
+    OMEGA,              // ω
+    VRTHETA,            // ϑ
+    VARPHI,             // ϕ
+    VARKPPA,            // ϰ
+    VARRHO,             // ϱ
+    LUNEPS,             // ϵ
+    CSZLIG,             // ẞ
+    NBHYP,              // ‑ (U+2011)
+    ENDASH,             // –
+    EMDASH,             // —
+    LSQUOT,             // ‘
+    RSQUOT,             // ’
+    LOSQUOT,            // ‚
+    LDQUOT,             // “
+    RDQUOT,             // ”
+    LODQUOT,            // „
+    DAGGER,             // †
+    BULLET,             // •
+    TRIBLLT,            // ‣
+    ELLIPS,             // …
+    NNBSP,              //   (U+202F)
+    PERMILL,            // ‰
+    PRIME,              // ′
+    DPRIME,             // ″
+    LSGUILM,            // ‹
+    RSGUILM,            // ›
+    FRACTSL,            // ⁄
+    SUBZERO,            // ₀
+    SUBONE,             // ₁
+    SUBTWO,             // ₂
+    SUBTHRE,            // ₃
+    EURO,               // €
+    COMPLEX,            // ℂ
+    SCRIPTL,            // ℓ
+    NATURAL,            // ℕ
+    NUMERO,             // №
+    RATIONL,            // ℚ
+    REAL,               // ℝ
+    INTEGER,            // ℤ
+    ALEF,               // ℵ
+    LEFTARR,            // ←
+    UPARROW,            // ↑
+    RIGHTAR,            // →
+    DOWNARR,            // ↓
+    LRARROW,            // ↔
+    UDARROW,            // ↕
+    RARRBAR,            // ↦
+    RLHARPO,            // ⇌
+    LDBLARR,            // ⇐
+    RDBLARR,            // ⇒
+    LRDBARR,            // ⇔
+    FORALL,             // ∀
+    PARTDRV,            // ∂
+    THREXST,            // ∃
+    EMPTYST,            // ∅
+    NABLA,              // ∇
+    ELEMOF,             // ∈
+    MINUS,              // −
+    MINPLS,             // ∓
+    DOTPLUS,            // ∔
+    SETMINS,            // ∖
+    RINGOP,             // ∘
+    SQRT,               // √
+    PROPTO,             // ∝
+    INFINIT,            // ∞
+    MEASANG,            // ∡
+    DIVIDES,            // ∣
+    PARALLL,            // ∥
+    LAND,               // ∧
+    LOR,                // ∨
+    INTRSCT,            // ∩
+    UNION,              // ∪
+    INTEGRL,            // ∫
+    DOTMINS,            // ∸
+    ALMSTEQ,            // ≈
+    NOTEQAL,            // ≠
+    IDENTCL,            // ≡
+    LEQUAL,             // ≤
+    GEQUAL,             // ≥
+    MCHLESS,            // ≪
+    MCHGRTR,            // ≫
+    SUBSET,             // ⊂
+    SUPRSET,            // ⊃
+    SUBEQL,             // ⊆
+    SUPREQL,            // ⊇
+    CPLUS,              // ⊕
+    CMINUS,             // ⊖
+    CTIMES,             // ⊛
+    CDOT,               // ⊙
+    UPTACK,             // ⊥
+    ORIGNAL,            // ⊶
+    IMAGEOF,            // ⊷
+    NARYINT,            // ⋂
+    NARYUNI,            // ⋃
+    DOTOPER,            // ⋅
+    DIAMETR,            // ⌀
+    LCEILNG,            // ⌈
+    RCEILNG,            // ⌉
+    LFLOOR,             // ⌊
+    RFLOOR,             // ⌋
+    OPNBOX,             // ␣
+    WHTSQAR,            // □
+    SPADE,              // ♠
+    CLUBS,              // ♣
+    HEART,              // ♥
+    DIAMOND,            // ♦
+    FEMALE,             // ♀
+    MALE,               // ♂
+    MALEFEM,            // ⚥
+    CHECKMK,            // ✔
+    XBALLOT,            // ✘
+    LANGLE,             // ⟨
+    RANGLE,             // ⟩
+
+    CIRCUM,           // ^
+    HACEK,            //  ̌
+    TURNED,           // ↻
+    DOTABVE,          //  ̇
+    HOOK,             // ˞
+    DOTBLOW,          // .
+    GRAVE,            // `
+    CEDILLE,          // ¸
+    OGONEK = CEDILLE, // ˛
+    RING,             // °
+    DIARESS,          //  ̈
+    SPASPER,          // ῾
+    MACRON,           //  ̄
+    ACUTE,            // ´
+    TILDE,            // ˜
+    SOLIDUS,          // /
+    DBLACUT,          // ˝
+    SPLENIS,          // ᾿
+    BREVE,            // ˘
+    VECTARR,          // →
+
+    // Miscellaneous
+    LEFTTAB, // tab but backwards
+
+    COMPOSE,
+    PASTHRU,
+    OLEDON,
+    NEO2,
+    QWERTZ,
+    QWERTY,
+};
+
+#define DECODED_KEY_USE_UNICODE 1
+#define DECODED_KEY_ONESHOT 2
+#define DECODED_KEY_SPECIAL 4
+
+struct decoded_key {
+    uint16_t keycode;
+    uint8_t  layer;
+    uint8_t  flags;
+};

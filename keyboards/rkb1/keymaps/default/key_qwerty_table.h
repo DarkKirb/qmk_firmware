@@ -1,4 +1,5 @@
 #pragma once
+#include "keymap.h"
 
 const struct decoded_key key_qwerty_mapping[] = {
     {KC_SPC, 1, 0},  // " "

@@ -1,4 +1,5 @@
 #pragma once
+#include "keymap.h"
 
 // Only contains ASCII characters, because the rest is sparsely mapped
 const struct decoded_key key_qwertz_mapping[] = {
