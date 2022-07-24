@@ -17,7 +17,7 @@
 #pragma once
 
 enum serial_transaction_id {
-#ifdef USE_I2C
+#if 1
     I2C_EXECUTE_CALLBACK,
 #endif // USE_I2C
 

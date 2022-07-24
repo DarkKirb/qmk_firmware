@@ -3,9 +3,15 @@
 
 #pragma once
 
-#define SPLIT_HAND_PIN GP21
-#define SPLIT_HAND_PIN_LOW_IS_LEFT 
-#define SPLIT_USB_DETECT
+#define SPLIT_HAND_PIN GP16
+#define SPLIT_HAND_PIN_LOW_IS_LEFT
+
+// Rows are doubled up for split keyboard support
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 6
+#define DEBUG_MATRIX_SCAN_RATE
+
+#define UNICODE_SELECTED_MODES UC_LNX, UC_MAC, UC_WINC
 
 /*
  * Feature disable options

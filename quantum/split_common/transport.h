@@ -147,7 +147,7 @@ typedef struct _rpc_sync_info_t {
 #endif // defined(OS_DETECTION_ENABLE) && defined(SPLIT_DETECTED_OS_ENABLE)
 
 typedef struct _split_shared_memory_t {
-#ifdef USE_I2C
+#if 1
     int8_t transaction_id;
 #endif // USE_I2C
 

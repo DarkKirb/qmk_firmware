@@ -914,7 +914,7 @@ split_transaction_desc_t split_transaction_table[NUM_TOTAL_TRANSACTIONS] = {
     // Set defaults
     [0 ...(NUM_TOTAL_TRANSACTIONS - 1)] = {0, 0, 0, 0, 0},
 
-#ifdef USE_I2C
+#if 1
     [I2C_EXECUTE_CALLBACK] = trans_initiator2target_initializer(transaction_id),
 #endif // USE_I2C
 
