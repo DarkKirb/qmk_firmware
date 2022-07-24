@@ -36,8 +36,6 @@ static void tap_on_layer(uint16_t key, uint8_t layer) {
     unregister_on_layer(key, layer);
 }
 
-enum layers { _L1, _L2, _L3, _L4, _L5, _L6, _L7, _L8, _L9, KP1, KP2, KP3, STN, FN };
-
 #define LSHCTL S(KC_LCTL)
 #define LSHGUI S(KC_LGUI)
 #define LSHALT S(KC_LALT)

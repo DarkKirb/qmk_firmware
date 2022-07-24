@@ -318,3 +318,5 @@ struct decoded_key {
     uint8_t  layer;
     uint8_t  flags;
 };
+
+enum layers { _L1, _L2, _L3, _L4, _L5, _L6, _L7, _L8, _L9, KP1, KP2, KP3, STN, FN };
