@@ -295,7 +295,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void matrix_init_user(void) {
+#ifdef STENO_ENABLE
     steno_set_mode(STENO_MODE_GEMINI);
+#endif
 #ifdef OLED_ENABLE
     oled_turn_on_for(60000);
 #endif

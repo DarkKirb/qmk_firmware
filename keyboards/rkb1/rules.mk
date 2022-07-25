@@ -10,3 +10,6 @@ COMMON_VPATH += $(QUANTUM_PATH)/split_common
 EXTRAINCDIRS += $(BOARD_PATH)
 
 CFLAGS += -Wl,--defsym=__unhandled_user_irq=_unhandled_exception
+
+#SRC += matrix.c
+#CUSTOM_MATRIX = lite

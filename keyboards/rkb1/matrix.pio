@@ -1,0 +1,37 @@
+.program matrix
+; INPUT: repeated bit pattern
+; 0000_0100_0000_1000_0001_0000_0010_0000_0100_0000_1000_0001_0000_0000_0000_0000
+; So, like: 0x0408_1020, 0x4081_0000
+  set x, 7
+loop:
+  pull ifempty [31]
+  ; Assert the column pins
+  out pins, 8 [31]
+  ; Read the row pins
+  in pins, 5 [31]
+  jmp x--, loop [31]
+  ; Output the two missing bits and push
+  in null, 2 [31]
+  push [31]
+
+% c-sdk {
+static inline void matrix_program_init(PIO pio, uint sm, uint offset, uint pin) {
+    pio_sm_config c = matrix_program_get_default_config(offset);
+
+    // The row inputs start at the pin base
+    sm_config_set_in_pins(&c, pin);
+    // The 6 output bits come after the 5 input bits
+    sm_config_set_out_pins(&c, pin + 5, 6);
+    // Set up the pins for PIO
+    for(int i = 0; i < 11; i++)
+        pio_gpio_init(pio, pin + i);
+    // Set the pin directions
+    pio_sm_set_consecutive_pindirs(pio, sm, pin, 5, false);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin + 5, 6, true);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

@@ -35,6 +35,7 @@ PICOSDKSRC     = $(PICOSDKROOT)/src/rp2_common/hardware_clocks/clocks.c \
                  $(PICOSDKROOT)/src/rp2_common/hardware_irq/irq.c \
                  $(PICOSDKROOT)/src/rp2_common/hardware_irq/irq_handler_chain.S \
                  $(PICOSDKROOT)/src/rp2_common/hardware_timer/timer.c \
+				 $(PICOSDKROOT)/src/rp2_common/hardware_dma/dma.c \
                  $(PICOSDKROOT)/src/rp2_common/pico_bootrom/bootrom.c \
                  $(PICOSDKROOT)/src/common/pico_time/time.c \
                  $(PICOSDKROOT)/src/common/pico_time/timeout_helper.c \
@@ -64,13 +65,14 @@ PICOSDKINC     = $(CHIBIOS)//os/various/pico_bindings/dumb/include \
                  $(PICOSDKROOT)/src/rp2_common/hardware_xosc/include \
                  $(PICOSDKROOT)/src/rp2_common/hardware_i2c/include \
                  $(PICOSDKROOT)/src/rp2_common/hardware_timer/include \
+				 $(PICOSDKROOT)/src/rp2_common/hardware_dma/include \
                  $(PICOSDKROOT)/src/rp2040/hardware_regs/include \
                  $(PICOSDKROOT)/src/rp2040/hardware_structs/include \
                  $(PICOSDKROOT)/src/boards/include \
                  $(PICOSDKROOT)/src/rp2_common/pico_bootrom/include \
                  $(PICOSDKROOT)/src/common/pico_time/include \
                  $(PICOSDKROOT)/src/common/pico_util/include \
-                 $(PICOSDKROOT)/src/common/pico_sync/include 
+                 $(PICOSDKROOT)/src/common/pico_sync/include
 
 PLATFORM_SRC += $(PICOSDKSRC)
 EXTRAINCDIRS += $(PICOSDKINC)
