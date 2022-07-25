@@ -4,7 +4,6 @@
 
 static void tap_on_layer(uint16_t key, uint8_t layer);
 static void register_on_layer(uint16_t key, uint8_t layer) {
-    register_code16(key);
     if (layer == 2 || layer == 5) {
         register_code(KC_LSHIFT);
     }
@@ -17,6 +16,7 @@ static void register_on_layer(uint16_t key, uint8_t layer) {
     if (layer == 7) {
         tap_on_layer(KC_GRV, 4);
     }
+    register_code16(key);
 }
 static void unregister_on_layer(uint16_t key, uint8_t layer) {
     unregister_code16(key);
@@ -65,63 +65,63 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CIRCUM,  U,       I,       A,       E,       O,       S,       N,       R,       T,       D,       Y,
         DIARESS, U_DIA,   O_DIA,   A_DIA,   P,       Z,       B,       M,       COMMA,   PERIOD,  J,       XXXXXXX,
         KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
-                          LS(_L6), LS(_L2), LS(_L3), KC_SPC,                    LS(_L7), LS(_L4), LS(_L5), KC_SPC
+                          LS(_L6), LS(_L2), KC_SPC,  LS(_L3),                    LS(_L7), LS(_L4), KC_SPC,  LS(_L5)
     ),
     [_L2] = LAYOUT(
         COMPOSE, CX,      CV,      CL,      CC,      CW,      CK,      CH,      CG,      CF,      CQ,      CSZLIG,
         HACEK,   CU,      CI,      CA,      CE,      CO,      CS,      CN,      CR,      CT,      CD,      CY,
         SPASPER, CU_DIA,  CO_DIA,  CA_DIA,  CP,      CZ,      CB,      CM,      ENDASH,  BULLET,  CJ,      XXXXXXX,
         LSHCTL,  LS(FN),  LSHGUI,  LSHALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
-                          LS(_L6), LS(_L2), LS(_L6), KC_SPC,                    XXXXXXX, XXXXXXX, LS(_L8), KC_SPC
+                          LS(_L6), LS(_L2), KC_SPC,  LS(_L6),                    XXXXXXX, XXXXXXX, KC_SPC,  LS(_L8)
     ),
     [_L3] = LAYOUT(
         COMPOSE, ELLIPS,  LOWLINE, LBRACKT, RBRACKT, ACIRCUM, EXCLAM,  LESSTHN, GREATER, EQUALS,  AMPSAND, LONG_S,
         DOTABVE, BSLASH,  FSLASH,  LBRACE,  RBRACE,  ASTERSK, QUESTN,  LPARENS, RPARENS, HYPHMIN, COLON,   AT,
         ACUTE,   NUMBER,  DOLLAR,  VRTLINE, ATILDE,  AGRAVE,  PLUS,    PERCENT, QUOT,    AAPOSTR, SEMCOL,  XXXXXXX,
         KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
-                          LS(_L6), LS(_L6), LS(_L3), KC_SPC,                    LS(_L7), LS(_L7), XXXXXXX, KC_SPC
+                          LS(_L6), LS(_L6), KC_SPC,  LS(_L3),                    LS(_L7), LS(_L7), KC_SPC,  XXXXXXX
     ),
     [_L4] = LAYOUT(
         COMPOSE, KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_PGDN, INVEXCL, SEVEN,   EIGHT,   NINE,    PLUS,    MINUS,
         DOTBLOW, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  INVQMRK, FOUR,    FIVE,    SIX,     COMMA,   PERIOD,
         SOLIDUS, KC_ESC,  KC_TAB,  KC_PSTE, KC_ENT,  KC_UNDO, COLON,   ONE,     TWO,     THREE,   SEMCOL,  KC_RSFT,
         RLTCTL,  LS(FN),  RLTGUI,  RLTALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
-                          XXXXXXX, XXXXXXX, LS(_L7), ZERO,                      LS(_L7), LS(_L4), LS(_L9), ZERO
+                          XXXXXXX, XXXXXXX, ZERO,    LS(_L7),                   LS(_L7), LS(_L4), ZERO,    LS(_L9)
     ),
     [_L5] = LAYOUT(
         COMPOSE, ONE,     TWO,     THREE,   FOUR,    FIVE,    SIX,     SEVEN,   EIGHT,   NINE,    ZERO,    HYPHMIN,
         CEDILLE, DEGREE,  SECTION, SCRIPTL, RDGUILM, LDGUILM, DOLLAR,  EURO,    LODQUOT, LDQUOT,  RDQUOT,  EMDASH,
         SPLENIS, SUPONE,  SUPTWO,  SUPTHRE, RSGUILM, LSGUILM, CENTSGN, YEN,     LOSQUOT, LSQUOT,  RSQUOT,  HYPHMIN,
         KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
-                          XXXXXXX, LS(_L8), XXXXXXX, KC_SPC,                    LS(_L9), XXXXXXX, LS(_L5), KC_SPC
+                          XXXXXXX, LS(_L8), KC_SPC,  XXXXXXX,                    LS(_L9), XXXXXXX, KC_SPC,  LS(_L5)
     ),
     [_L6] = LAYOUT(
         COMPOSE, XI,      XXXXXXX, LAMBDA,  CHI,     OMEGA,   KAPPA,   PSI,     GAMMA,   PHI,     VARPHI,  FSIGMA,
         TURNED,  XXXXXXX, IOTA,    ALPHA,   EPSILON, OMICRON, SIGMA,   NU,      RHO,     TAU,     DELTA,   UPSILON,
         MACRON,  XXXXXXX, LUNEPS,  ETA,     PI,      ZETA,    BETA,    MU,      VARRHO,  VRTHETA, THETA,   XXXXXXX,
         LSHCTL,  LS(FN),  LSHGUI,  LSHALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
-                          LS(_L6), LS(_L6), LS(_L6), KC_SPC,                    XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC
+                          LS(_L6), LS(_L6), KC_SPC,  LS(_L6),                    XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX
     ),
     [_L7] = LAYOUT(
         COMPOSE, CXI,     SQRT,    CLAMBDA, COMPLEX, COMEGA,  MULTSGN, CPSI,    CGAMMA,  CPHI,    RATIONL, RINGOP,
         HOOK,    SUBSET,  INTEGRL, FORALL,  THREXST, ELEMOF,  CSIGMA,  NATURAL, REAL,    PARTDRV, CDELTA,  NABLA,
         TILDE,   UNION,   INTRSCT, ALEF,    CPI,     INTEGER, LDBLARR, LRDBARR, RDBLARR, RARRBAR, CTHETA,  XXXXXXX,
         RLTCTL,  LS(FN),  RLTGUI,  RLTALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
-                          XXXXXXX, XXXXXXX, LS(_L7), KC_SPC,                    LS(_L7), LS(_L7), XXXXXXX, KC_SPC
+                          XXXXXXX, XXXXXXX, KC_SPC,  LS(_L7),                    LS(_L7), LS(_L7), KC_SPC,  XXXXXXX
     ),
     [_L8] = LAYOUT(
         COMPOSE, FEMORD,  MASCORD, NUMERO,  XXXXXXX, MIDDOT,  POUND,   CURENCY, KC_TAB,  FSLASH,  ASTERSK, HYPHMIN,
         RING,    SUBONE,  SUBTWO,  SUBTHRE, FEMALE,  MALE,    MALEFEM, VARKPPA, LANGLE,  RANGLE,  SUBZERO, NBHYP,
         BREVE,   NOTSIGN, LOR,     LAND,    UPTACK,  MEASANG, PARALLL, RIGHTAR, INFINIT, PROPTO,  EMPTYST, SHYPHEN,
         KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
-                          XXXXXXX, LS(_L8), XXXXXXX, KC_SPC,                    XXXXXXX, XXXXXXX, LS(_L8), KC_SPC
+                          XXXXXXX, LS(_L8), KC_SPC,  XXXXXXX,                    XXXXXXX, XXXXXXX, KC_SPC,  LS(_L8)
     ),
     [_L9] = LAYOUT(
         COMPOSE, XXXXXXX, KC_BTN1, KC_MS_U, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN3, KC_WH_U, KC_BTN4, XXXXXXX,
         GRAVE,   XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN6, KC_WH_D, KC_BTN5, XXXXXXX,
         DBLACUT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
-                          XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,                    LS(_L9), XXXXXXX, LS(_L9), KC_SPC
+                          XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX,                    LS(_L9), XXXXXXX, KC_SPC,  LS(_L9)
     ),
     [KP1] = LAYOUT(
         KC_NLCK, KC_TAB,  KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX, XXXXXXX, LEFTTAB, FSLASH,  ASTERSK, HYPHMIN, XXXXXXX,
