@@ -15,6 +15,8 @@
 
 #define OLED_DISPLAY_128X64
 
+#define ONESHOT_TAP_TOGGLE 2
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
