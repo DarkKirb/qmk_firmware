@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_steno.h"
 #include "keymap.h"
+#include "raw_hid.h"
 
 static void tap_on_layer(uint16_t key, uint8_t layer);
 static void register_on_layer(uint16_t key, uint8_t layer) {
@@ -64,63 +65,63 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         COMPOSE, X,       V,       L,       C,       W,       K,       H,       G,       F,       Q,       SZLIG,
         CIRCUM,  U,       I,       A,       E,       O,       S,       N,       R,       T,       D,       Y,
         DIARESS, U_DIA,   O_DIA,   A_DIA,   P,       Z,       B,       M,       COMMA,   PERIOD,  J,       XXXXXXX,
-        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           LS(_L2), LS(_L6), KC_SPC,  LS(_L3),                   LS(_L4), LS(_L7), KC_SPC,  LS(_L5)
     ),
     [_L2] = LAYOUT(
         COMPOSE, CX,      CV,      CL,      CC,      CW,      CK,      CH,      CG,      CF,      CQ,      CSZLIG,
         HACEK,   CU,      CI,      CA,      CE,      CO,      CS,      CN,      CR,      CT,      CD,      CY,
         SPASPER, CU_DIA,  CO_DIA,  CA_DIA,  CP,      CZ,      CB,      CM,      ENDASH,  BULLET,  CJ,      XXXXXXX,
-        LSHCTL,  LS(FN),  LSHGUI,  LSHALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
+        LSHCTL,  LS(FN),  LSHGUI,  LSHALT,  PASTHRU, LS(KP1), TG(STN), OLEDON,  RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
                           LS(_L2), LS(_L6), KC_SPC,  LS(_L6),                   XXXXXXX, XXXXXXX, KC_SPC,  LS(_L8)
     ),
     [_L3] = LAYOUT(
         COMPOSE, ELLIPS,  LOWLINE, LBRACKT, RBRACKT, ACIRCUM, EXCLAM,  LESSTHN, GREATER, EQUALS,  AMPSAND, LONG_S,
         DOTABVE, BSLASH,  FSLASH,  LBRACE,  RBRACE,  ASTERSK, QUESTN,  LPARENS, RPARENS, HYPHMIN, COLON,   AT,
         ACUTE,   NUMBER,  DOLLAR,  VRTLINE, ATILDE,  AGRAVE,  PLUS,    PERCENT, QUOT,    AAPOSTR, SEMCOL,  XXXXXXX,
-        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           LS(_L6), LS(_L6), KC_SPC,  LS(_L3),                   LS(_L7), LS(_L7), KC_SPC,  XXXXXXX
     ),
     [_L4] = LAYOUT(
         COMPOSE, KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_PGDN, INVEXCL, SEVEN,   EIGHT,   NINE,    PLUS,    MINUS,
         DOTBLOW, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  INVQMRK, FOUR,    FIVE,    SIX,     COMMA,   PERIOD,
         SOLIDUS, KC_ESC,  KC_TAB,  KC_PSTE, KC_ENT,  KC_UNDO, COLON,   ONE,     TWO,     THREE,   SEMCOL,  KC_RSFT,
-        RLTCTL,  LS(FN),  RLTGUI,  RLTALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
+        RLTCTL,  LS(FN),  RLTGUI,  RLTALT,  PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
                           XXXXXXX, XXXXXXX, ZERO,    LS(_L7),                   LS(_L4), LS(_L7), ZERO,    LS(_L9)
     ),
     [_L5] = LAYOUT(
         COMPOSE, ONE,     TWO,     THREE,   FOUR,    FIVE,    SIX,     SEVEN,   EIGHT,   NINE,    ZERO,    HYPHMIN,
         CEDILLE, DEGREE,  SECTION, SCRIPTL, RDGUILM, LDGUILM, DOLLAR,  EURO,    LODQUOT, LDQUOT,  RDQUOT,  EMDASH,
         SPLENIS, SUPONE,  SUPTWO,  SUPTHRE, RSGUILM, LSGUILM, CENTSGN, YEN,     LOSQUOT, LSQUOT,  RSQUOT,  HYPHMIN,
-        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           LS(_L8), XXXXXXX, KC_SPC,  XXXXXXX,                   XXXXXXX, LS(_L9), KC_SPC,  LS(_L5)
     ),
     [_L6] = LAYOUT(
         COMPOSE, XI,      XXXXXXX, LAMBDA,  CHI,     OMEGA,   KAPPA,   PSI,     GAMMA,   PHI,     VARPHI,  FSIGMA,
         TURNED,  XXXXXXX, IOTA,    ALPHA,   EPSILON, OMICRON, SIGMA,   NU,      RHO,     TAU,     DELTA,   UPSILON,
         MACRON,  XXXXXXX, LUNEPS,  ETA,     PI,      ZETA,    BETA,    MU,      VARRHO,  VRTHETA, THETA,   XXXXXXX,
-        LSHCTL,  LS(FN),  LSHGUI,  LSHALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
+        LSHCTL,  LS(FN),  LSHGUI,  LSHALT,  PASTHRU, LS(KP1), TG(STN), OLEDON,  RSHALT,  RSHGUI,  SHAPP,   RSHCTL,
                           LS(_L6), LS(_L6), KC_SPC,  LS(_L6),                   XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX
     ),
     [_L7] = LAYOUT(
         COMPOSE, CXI,     SQRT,    CLAMBDA, COMPLEX, COMEGA,  MULTSGN, CPSI,    CGAMMA,  CPHI,    RATIONL, RINGOP,
         HOOK,    SUBSET,  INTEGRL, FORALL,  THREXST, ELEMOF,  CSIGMA,  NATURAL, REAL,    PARTDRV, CDELTA,  NABLA,
         TILDE,   UNION,   INTRSCT, ALEF,    CPI,     INTEGER, LDBLARR, LRDBARR, RDBLARR, RARRBAR, CTHETA,  XXXXXXX,
-        RLTCTL,  LS(FN),  RLTGUI,  RLTALT,  PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
+        RLTCTL,  LS(FN),  RLTGUI,  RLTALT,  PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, RLTRGUI, RLTAPP,  RLTRCTL,
                           XXXXXXX, XXXXXXX, KC_SPC,  LS(_L7),                   LS(_L7), LS(_L7), KC_SPC,  XXXXXXX
     ),
     [_L8] = LAYOUT(
         COMPOSE, FEMORD,  MASCORD, NUMERO,  XXXXXXX, MIDDOT,  POUND,   CURENCY, KC_TAB,  FSLASH,  ASTERSK, HYPHMIN,
         RING,    SUBONE,  SUBTWO,  SUBTHRE, FEMALE,  MALE,    MALEFEM, VARKPPA, LANGLE,  RANGLE,  SUBZERO, NBHYP,
         BREVE,   NOTSIGN, LOR,     LAND,    UPTACK,  MEASANG, PARALLL, RIGHTAR, INFINIT, PROPTO,  EMPTYST, SHYPHEN,
-        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           LS(_L8), XXXXXXX, KC_SPC,  XXXXXXX,                   XXXXXXX, XXXXXXX, KC_SPC,  LS(_L8)
     ),
     [_L9] = LAYOUT(
         COMPOSE, XXXXXXX, KC_BTN1, KC_MS_U, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN3, KC_WH_U, KC_BTN4, XXXXXXX,
         GRAVE,   XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN6, KC_WH_D, KC_BTN5, XXXXXXX,
         DBLACUT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), LS(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
+        KC_LCTL, LS(FN),  KC_LGUI, KC_LALT, PASTHRU, LS(KP1), TG(STN), OLEDON,  KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,
                           XXXXXXX, XXXXXXX, KC_SPC,  XXXXXXX,                   XXXXXXX, LS(_L9), KC_SPC,  LS(_L9)
     ),
     [KP1] = LAYOUT(
@@ -148,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         STN_N1,  STN_N1,  STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,  STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NA,
         STN_PLS, STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
         STN_PLS, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LS(STN), OLEDON,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(STN), OLEDON,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                           STN_HAT, STN_HAT, STN_A,   STN_O,                     STN_HAT, STN_HAT, STN_E,   STN_U
     ),
     [FN] = LAYOUT(
@@ -385,5 +386,58 @@ bool oled_task_user(void) {
     oled_write(led_state.scroll_lock ? "SCR " : "    ", false);
 
     return false;
+}
+#endif
+
+#ifdef RAW_ENABLE
+// custom HID code
+static uint32_t enable_until = 0;
+
+static bool is_steno_on(void) {
+    if (enable_until < timer_read32()) {
+        return false;
+    }
+    return get_highest_layer(layer_state) == STN;
+}
+
+void raw_hid_receive(uint8_t *data, uint8_t length) {
+    if (length != 3) {
+        enable_until = 0; // Unknown input
+        return;
+    }
+    if (memcmp(data, "STN", 3) == 0) {
+        // You need to send a packet every 10s
+        enable_until = timer_read32() + 20000;
+    } else {
+        enable_until = 0;
+    }
+}
+
+matrix_row_t last_matrix[MATRIX_ROWS];
+
+void matrix_scan_kb(void) {
+    matrix_scan_user();
+    if (likely(!is_steno_on())) {
+        return;
+    }
+
+    matrix_row_t new_matrix[MATRIX_ROWS];
+
+    for (int row = 0; row < MATRIX_ROWS; row++) {
+        new_matrix[row] = matrix_get_row(row);
+    }
+
+    if (memcmp(new_matrix, last_matrix, sizeof(last_matrix)) == 0) {
+        return;
+    }
+
+    memcpy(last_matrix, new_matrix, sizeof(last_matrix));
+
+    uint8_t buffer[RAW_EPSIZE];
+    buffer[0] = 'S';
+    buffer[1] = 'T';
+    buffer[2] = 'N';
+    memcpy(buffer + 3, new_matrix, sizeof(new_matrix));
+    raw_hid_send(buffer, sizeof(buffer));
 }
 #endif

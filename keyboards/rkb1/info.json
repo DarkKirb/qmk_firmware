@@ -103,8 +103,5 @@
 		        { "matrix": [9, 0], "x": 11, "y": 4 }
             ]
         }
-    },
-    "stenography": {
-        "enabled": true
     }
 }

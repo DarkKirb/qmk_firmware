@@ -15,3 +15,5 @@ CFLAGS += -Wl,--defsym=__unhandled_user_irq=_unhandled_exception
 #CUSTOM_MATRIX = lite
 
 SERIAL_DRIVER = vendor
+
+RAW_ENABLE = yes
