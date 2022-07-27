@@ -22,7 +22,7 @@
 #include "transaction_id_define.h"
 #include "atomic_util.h"
 
-#if 1
+#if USE_I2C
 
 #    ifndef SLAVE_I2C_TIMEOUT
 #        define SLAVE_I2C_TIMEOUT 100

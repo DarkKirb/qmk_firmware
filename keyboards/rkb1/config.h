@@ -17,6 +17,11 @@
 
 #define ONESHOT_TAP_TOGGLE 2
 
+#define SERIAL_USART_HALF_DUPLEX
+#define SERIAL_USART_TX_PIN GP18
+//#define SERIAL_USART_RX_PIN GP19
+//#define SERIAL_USART_PIN_SWAP
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.

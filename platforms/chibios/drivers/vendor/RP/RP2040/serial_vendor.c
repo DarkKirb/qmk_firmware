@@ -3,6 +3,8 @@
 
 #include "serial_usart.h"
 #include "serial_protocol.h"
+#undef PARAM_ASSERTIONS_ENABLED
+#define PARAM_ASSERTIONS_ENABLED(x) 0
 #include "hardware/pio.h"
 #include "hardware/clocks.h"
 #include "wait.h"
