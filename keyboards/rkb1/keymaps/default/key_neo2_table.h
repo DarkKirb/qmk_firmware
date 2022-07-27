@@ -1,5 +1,4 @@
 #pragma once
-#include "keymap.h"
 
 const struct decoded_key key_neo2_mapping[] = {
     {KC_SPC, 1, 0},  // " "
@@ -123,9 +122,9 @@ const struct decoded_key key_neo2_mapping[] = {
     {KC_Z, 2, 0},    // Ü
     {KC_LBRC, 1, 0}, // ß
     {KC_C, 1, 0},    // ä
-    {KC_X, 3, 0},    // ö
+    {KC_X, 1, 0},    // ö
     {KC_PSLS, 3, 0}, // ÷
-    {KC_Z, 3, 0},    // ü
+    {KC_Z, 1, 0},    // ü
     {KC_LBRC, 3, 0}, // ſ
     {KC_I, 6, 0},    // Γ
     {KC_SCLN, 6, 0}, // Δ
