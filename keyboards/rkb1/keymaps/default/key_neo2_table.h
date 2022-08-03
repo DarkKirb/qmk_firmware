@@ -12,7 +12,7 @@ const struct decoded_key key_neo2_mapping[] = {
     {KC_J, 3, 0},    // (
     {KC_K, 3, 0},    // )
     {KC_G, 3, 0},    // *
-    {KC_B, 3, 0},    // +
+    {KC_N, 3, 0},    // +
     {KC_COMM, 1, 0}, // ,
     {KC_L, 3, 0},    // -
     {KC_DOT, 1, 0},  // .
