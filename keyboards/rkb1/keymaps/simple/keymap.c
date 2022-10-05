@@ -25,8 +25,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN] = LAYOUT(
       KC_ESC , KC_Q   , KC_W   , KC_E       , KC_R   , KC_T   , KC_Y   , KC_U       , KC_I      , KC_O   , KC_P    , KC_LBRC,
       KC_TAB , KC_A   , KC_S   , KC_D       , KC_F   , KC_G   , KC_H   , KC_J       , KC_K      , KC_L   , KC_SCLN , KC_QUOT,
-      KC_LSFT, KC_Z   , KC_X   , KC_C       , KC_V   , KC_B   , KC_N   , KC_M       , KC_COMM   , KC_DOT , KC_MINS , KC_LEAD,
-      KC_LCTL, KC_LGUI, KC_LALT, KC_NUBS    , TT(_FN), _______, _______, TT(_PLOVER), KC_RALT   , KC_RGUI, KC_APP  , KC_RCTL,
+      KC_LSFT, KC_Z   , KC_X   , KC_C       , KC_V   , KC_B   , KC_N   , KC_M       , KC_COMM   , KC_DOT , KC_SLSH , KC_LEAD,
+      KC_LCTL, KC_LGUI, KC_LALT, KC_NUBS    , TT(_FN), _______, _______, TG(_PLOVER), KC_RALT   , KC_RGUI, KC_APP  , KC_RCTL,
                         KC_CAPS, TT(_GAMING), KC_SPC , KC_LSFT,                       TT(_MOUSE), TT(_NUMPAD), TT(_NAV), TT(_SYS)
   ),
   [_NUMPAD] = LAYOUT(
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT(
     _______, KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_PGDN, RA(KC_Y),KC_7,    KC_8,    KC_9, RA(KC_P), RA(KC_LBRC),
     _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  RA(KC_H),KC_4,    KC_5,    KC_6, RA(KC_SCLN), RA(KC_QUOT),
-    _______, KC_ESC,  KC_TAB,  KC_PSTE, KC_ENT,  KC_UNDO, RA(KC_N),KC_1,    KC_2,    KC_3, RA(KC_DOT), _______,
+    _______, KC_ESC,  KC_TAB,  KC_PSTE, KC_ENT,  KC_UNDO, RA(KC_N),KC_1,    KC_2,    KC_3, RA(KC_SLSH), _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                       _______, _______, KC_0,    _______,                   _______, _______, _______, _______
   ),
@@ -130,5 +130,58 @@ void matrix_scan_kb(void) {
     buffer[2] = 'N';
     memcpy(buffer + 3, new_matrix, sizeof(new_matrix));
     raw_hid_send(buffer, sizeof(buffer));
+}
+
+static void send_unicode_chunk(const char * data, size_t length) {
+  uint8_t buffer[RAW_EPSIZE];
+  memset(buffer, 0, sizeof(buffer));
+  buffer[0] = 'U';
+  buffer[1] = 'N';
+  buffer[2] = 'I';
+  memcpy(buffer + 3, data, length);
+  raw_hid_send(buffer, sizeof(buffer));
+}
+
+#define UNI_CHUNKSIZE (RAW_EPSIZE - 3)
+
+void send_unicode_string(const char * str) {
+  size_t length = strlen(str);
+  while(length > UNI_CHUNKSIZE) {
+    send_unicode_chunk(str, UNI_CHUNKSIZE);
+    str += UNI_CHUNKSIZE;
+    length -= UNI_CHUNKSIZE;
+  }
+  send_unicode_chunk(str, length);
+}
+
+void register_unicode(uint32_t codepoint) {
+  uint8_t buffer[4];
+  size_t size;
+  if(codepoint < 0x80) {
+    buffer[0] = (uint8_t)codepoint;
+    size = 1;
+  } else if(codepoint < 0x800) {
+    buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
+    codepoint >>= 6;
+    buffer[0] = 0xC0 | (uint8_t)(codepoint);
+    size = 2; 
+  } else if(codepoint < 0x10000) {
+    buffer[2] = 0x80 | (uint8_t)(codepoint & 0x3F);
+    codepoint >>= 6;
+    buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
+    codepoint >>= 6;
+    buffer[0] = 0xE0 | (uint8_t)(codepoint);
+    size = 3;
+  } else {
+    buffer[3] = 0x80 | (uint8_t)(codepoint & 0x3F);
+    codepoint >>= 6;
+    buffer[2] = 0x80 | (uint8_t)(codepoint & 0x3F);
+    codepoint >>= 6;
+    buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
+    codepoint >>= 6;
+    buffer[0] = 0xF0 | (uint8_t)(codepoint);
+    size = 4;
+  }
+  send_unicode_chunk((char *)buffer, size);
 }
 #endif

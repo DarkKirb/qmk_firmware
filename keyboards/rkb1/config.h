@@ -22,6 +22,8 @@
 //#define SERIAL_USART_RX_PIN GP19
 //#define SERIAL_USART_PIN_SWAP
 
+#define LEADER_NO_TIMEOUT
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.

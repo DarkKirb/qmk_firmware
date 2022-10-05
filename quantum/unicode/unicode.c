@@ -357,7 +357,7 @@ void register_hex32(uint32_t hex) {
     }
 }
 
-void register_unicode(uint32_t code_point) {
+__attribute__((weak)) void register_unicode(uint32_t code_point) {
     if (code_point > 0x10FFFF || (code_point > 0xFFFF && unicode_config.input_mode == UNICODE_MODE_WINDOWS)) {
         // Code point out of range, do nothing
         return;
@@ -376,7 +376,7 @@ void register_unicode(uint32_t code_point) {
     unicode_input_finish();
 }
 
-void send_unicode_string(const char *str) {
+__attribute__((weak)) void send_unicode_string(const char *str) {
     if (!str) {
         return;
     }
