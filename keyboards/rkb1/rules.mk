@@ -18,3 +18,4 @@ SERIAL_DRIVER = vendor
 
 RAW_ENABLE = yes
 CAPS_WORD_ENABLE = yes
+KEY_LOCK_ENABLE = yes
