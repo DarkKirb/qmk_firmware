@@ -3,6 +3,8 @@
 #include QMK_KEYBOARD_H
 #include "keymap_steno.h"
 #include "raw_hid.h"
+#include "neo2.h"
+#include "compose.h"
 enum {
   _MAIN,
   _NUMPAD,
@@ -144,7 +146,7 @@ static void send_unicode_chunk(const char * data, size_t length) {
 
 #define UNI_CHUNKSIZE (RAW_EPSIZE - 3)
 
-void send_unicode_string(const char * str) {
+/*void send_unicode_string(const char * str) {
   size_t length = strlen(str);
   while(length > UNI_CHUNKSIZE) {
     send_unicode_chunk(str, UNI_CHUNKSIZE);
@@ -152,7 +154,7 @@ void send_unicode_string(const char * str) {
     length -= UNI_CHUNKSIZE;
   }
   send_unicode_chunk(str, length);
-}
+}*/
 
 void register_unicode(uint32_t codepoint) {
   uint8_t buffer[4];
@@ -184,4 +186,10 @@ void register_unicode(uint32_t codepoint) {
   }
   send_unicode_chunk((char *)buffer, size);
 }
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+  track_neo2_modifier_state(keycode, record);
+  process_compose(keycode, record);
+}
+
 #endif
