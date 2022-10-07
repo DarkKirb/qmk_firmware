@@ -23,6 +23,7 @@
 //#define SERIAL_USART_PIN_SWAP
 
 #define LEADER_NO_TIMEOUT
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 
 /*
  * Feature disable options
