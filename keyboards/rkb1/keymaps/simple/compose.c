@@ -103,8 +103,9 @@ static bool isCombining(uint32_t uc) {
 void process_compose(uint16_t keycode, keyrecord_t *record) {
   if(!record->event.pressed)
     return;
+  uint32_t uc = keystroke_to_unicode(keycode);
   const compose_edge_t * edge = findEdge(keycode);
-  if(edge == NULL) { // no matching edge found, reset and try again
+  if(edge == NULL && uc != 0) { // no matching edge found, reset and try again
     print("No matching edge found, reset.\n");
     resetState();
     edge = findEdge(keycode);
@@ -114,7 +115,7 @@ void process_compose(uint16_t keycode, keyrecord_t *record) {
     return; // nothing found
   }
   // before we can advance the compose state, we need to prepare certain keys (dead keys, the leader key) because otherwise our deletion will delete too much (which of course is something we do not want)
-  if(isCombining(keystroke_to_unicode(keycode))) {
+  if(isCombining(uc)) {
     print("keycode refers to deadkey, writing space\n");
     tap_code(KC_SPACE);
   } else if(keycode == KC_LEAD) {
