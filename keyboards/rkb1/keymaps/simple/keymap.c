@@ -5,17 +5,7 @@
 #include "raw_hid.h"
 #include "neo2.h"
 #include "compose.h"
-enum {
-  _MAIN,
-  _NUMPAD,
-  _PLOVER,
-  _MOUSE,
-  _GAMING,
-  _SYS,
-  _NAV,
-  _FN,
-  _EMPTY
-};
+enum { _MAIN, _NUMPAD, _PLOVER, _MOUSE, _GAMING, _SYS, _NAV, _FN, _EMPTY };
 
 #define LAYOUT(k0A, k0B, k0C, k0D, k0E, k0F, k5A, k5B, k5C, k5D, k5E, k5F, k1A, k1B, k1C, k1D, k1E, k1F, k6A, k6B, k6C, k6D, k6E, k6F, k2A, k2B, k2C, k2D, k2E, k2F, k7A, k7B, k7C, k7D, k7E, k7F, k3A, k3B, k3C, k3D, k3E, k3F, k8A, k8B, k8C, k8D, k8E, k8F, k4C, k4D, k4E, k4F, k9C, k9D, k9E, k9F) LAYOUT_ortho_4x6_2x2uc(k0A, k0B, k0C, k0D, k0E, k0F, k1A, k1B, k1C, k1D, k1E, k1F, k2A, k2B, k2C, k2D, k2E, k2F, k3A, k3B, k3C, k3D, k3E, k3F, k4C, k4D, k4E, k4F, k5A, k5B, k5C, k5D, k5E, k5F, k6A, k6B, k6C, k6D, k6E, k6F, k7A, k7B, k7C, k7D, k7E, k7F, k8A, k8B, k8C, k8D, k8E, k8F, k9C, k9D, k9E, k9F)
 #define STN_PLS STN_NB
@@ -27,8 +17,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN] = LAYOUT(
       KC_ESC , KC_Q   , KC_W   , KC_E       , KC_R   , KC_T   , KC_Y   , KC_U       , KC_I      , KC_O   , KC_P    , KC_LBRC,
       KC_TAB , KC_A   , KC_S   , KC_D       , KC_F   , KC_G   , KC_H   , KC_J       , KC_K      , KC_L   , KC_SCLN , KC_QUOT,
-      KC_LSFT, KC_Z   , KC_X   , KC_C       , KC_V   , KC_B   , KC_N   , KC_M       , KC_COMM   , KC_DOT , KC_SLSH , KC_LEAD,
-      KC_LCTL, KC_LGUI, KC_LALT, KC_NUBS    , TT(_FN), _______, KC_LOCK, TG(_PLOVER), KC_RALT   , KC_RGUI, KC_APP  , KC_RCTL,
+      KC_LSFT, KC_Z   , KC_X   , KC_C       , KC_V   , KC_B   , KC_N   , KC_M       , KC_COMM   , KC_DOT , KC_SLSH , QK_LEAD,
+      KC_LCTL, KC_LGUI, KC_LALT, KC_NUBS    , TT(_FN), _______, QK_LOCK, TG(_PLOVER), KC_RALT   , KC_RGUI, KC_APP  , KC_RCTL,
                         KC_CAPS, TT(_GAMING), KC_SPC , KC_LSFT,                       TT(_MOUSE), TT(_NUMPAD), TT(_NAV), TT(_SYS)
   ),
   [_NUMPAD] = LAYOUT(
@@ -166,7 +156,7 @@ void register_unicode(uint32_t codepoint) {
     buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
     codepoint >>= 6;
     buffer[0] = 0xC0 | (uint8_t)(codepoint);
-    size = 2; 
+    size = 2;
   } else if(codepoint < 0x10000) {
     buffer[2] = 0x80 | (uint8_t)(codepoint & 0x3F);
     codepoint >>= 6;
