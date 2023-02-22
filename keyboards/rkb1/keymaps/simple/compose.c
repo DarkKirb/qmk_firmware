@@ -6,6 +6,7 @@
 #include "print.h"
 #include "quantum_keycodes.h"
 #include "unicode/unicode.h"
+#include "rpscalc/calc.h"
 
 static int charsWritten, currentState;
 
@@ -97,9 +98,19 @@ static bool isCombining(uint32_t uc) {
     return false;
 }
 
+static void process_special(uint32_t uc, uint16_t keycode) {
+    if (calculator_is_active()) {
+        if (keycode == KC_BACKSPACE)
+            calculator_process_backspace();
+        else if (uc != 0)
+            calculator_process_char((char)uc);
+    }
+}
+
 void process_compose(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) return;
-    uint32_t              uc   = keystroke_to_unicode(keycode);
+    uint32_t uc = keystroke_to_unicode(keycode);
+    process_special(uc, keycode);
     const compose_edge_t *edge = findEdge(keycode);
     if (edge == NULL && uc != 0) { // no matching edge found, reset and try again
         uprintf("uc: %ld", uc);

@@ -1,1 +1,1 @@
-SRC += neo2.c compose.c
+SRC += neo2.c compose.c rpscalc/calc.c
