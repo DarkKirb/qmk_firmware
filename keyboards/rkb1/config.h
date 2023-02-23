@@ -25,6 +25,12 @@
 #define LEADER_NO_TIMEOUT
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 
+// Required for calculator
+#ifdef PRINTF_SUPPORT_EXPONENTIAL_SPECIFIERS
+#    undef PRINTF_SUPPORT_EXPONENTIAL_SPECIFIERS
+#    define PRINTF_SUPPORT_EXPONENTIAL_SPECIFIERS 1
+#endif
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
