@@ -13,6 +13,8 @@
 
 #define UNICODE_SELECTED_MODES UC_LNX, UC_MAC, UC_WINC
 
+#define OLED_DISPLAY_128X64
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.

@@ -1,5 +1,8 @@
 UNICODE_ENABLE = yes
 
+OLED_ENABLE = yes
+OLED_DRIVER = SSD1306
+
 SRC += i2c_slave.c i2c_master.c
 QUANTUM_SRC += $(QUANTUM_DIR)/split_common/transport.c $(QUANTUM_DIR)/split_common/transactions.c
 OPT_DEFS += -DSPLIT_COMMON_TRANSACTIONS
