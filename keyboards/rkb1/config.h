@@ -3,6 +3,10 @@
 
 #pragma once
 
+#define SPLIT_HAND_PIN GP21
+#define SPLIT_HAND_PIN_LOW_IS_LEFT 
+#define SPLIT_USB_DETECT
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.

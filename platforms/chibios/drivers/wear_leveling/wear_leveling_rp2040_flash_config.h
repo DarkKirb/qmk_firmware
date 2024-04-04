@@ -3,6 +3,13 @@
 #pragma once
 
 #ifndef __ASSEMBLER__
+#define _PICO_ASSERT_H
+#include <stdbool.h>
+#include <assert.h>
+#define PARAM_ASSERTIONS_ENABLED(x) /* x */
+#define invalid_params_if(x, test) /* x test */
+#define valid_params_if(x, test) /* x test */
+#define hard_assert_if(x, test) /* x test */
 #    include "hardware/flash.h"
 #endif
 
@@ -30,3 +37,4 @@
 #ifndef WEAR_LEVELING_RP2040_FLASH_BASE
 #    define WEAR_LEVELING_RP2040_FLASH_BASE ((WEAR_LEVELING_RP2040_FLASH_SIZE) - (WEAR_LEVELING_BACKING_SIZE))
 #endif
+

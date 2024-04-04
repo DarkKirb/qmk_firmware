@@ -128,3 +128,4 @@ bool transport_master(matrix_row_t master_matrix[], matrix_row_t slave_matrix[])
 void transport_slave(matrix_row_t master_matrix[], matrix_row_t slave_matrix[]) {
     transactions_slave(master_matrix, slave_matrix);
 }
+
