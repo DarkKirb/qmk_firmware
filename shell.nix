@@ -5,7 +5,7 @@ in
 # However, if you want to override Niv's inputs, this will let you do that.
 { pkgs ? import sources.nixpkgs { }
 , poetry2nix ? pkgs.callPackage (import sources.poetry2nix) { }
-, avr ? true
+, avr ? false
 , arm ? true
 , teensy ? true }:
 with pkgs;
@@ -59,7 +59,7 @@ mkShell {
       avrlibc
       avrdude
     ]
-    ++ lib.optional arm [ gcc-arm-embedded ]
+    ++ lib.optional arm [ gcc-arm-embedded elf2uf2-rs ]
     ++ lib.optional teensy [ teensy-loader-cli ];
 
   AVR_CFLAGS = lib.optional avr avr_incflags;
