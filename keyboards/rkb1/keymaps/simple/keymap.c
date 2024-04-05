@@ -125,7 +125,7 @@ void matrix_scan_kb(void) {
 
     memcpy(last_matrix, new_matrix, sizeof(last_matrix));
 
-    uint8_t buffer[RAW_EPSIZE];
+    uint8_t buffer[3 + sizeof(new_matrix)];
     buffer[0] = 'S';
     buffer[1] = 'T';
     buffer[2] = 'N';
@@ -134,7 +134,7 @@ void matrix_scan_kb(void) {
 }
 
 static void send_unicode_chunk(const char * data, size_t length) {
-  uint8_t buffer[RAW_EPSIZE];
+  uint8_t buffer[7];
   memset(buffer, 0, sizeof(buffer));
   buffer[0] = 'U';
   buffer[1] = 'N';
