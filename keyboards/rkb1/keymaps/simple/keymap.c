@@ -6,6 +6,7 @@
 #include "neo2.h"
 #include "compose.h"
 #include "rpscalc/calc.h"
+#include "print.h"
 enum { _MAIN, _NUMPAD, _PLOVER, _MOUSE, _GAMING, _SYS, _NAV, _FN, _SPECIAL, _EMPTY };
 enum { MODCNCL = SAFE_RANGE, MODCALC };
 
@@ -81,110 +82,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-#ifdef RAW_ENABLE
-// custom HID code
-static uint32_t enable_until = 0;
-
-static bool is_steno_on(void) {
-    if (enable_until < timer_read32()) {
-        return false;
-    }
-    return get_highest_layer(layer_state) == _PLOVER;
-}
-
-void raw_hid_receive(uint8_t *data, uint8_t length) {
-    if (length != 3) {
-        enable_until = 0; // Unknown input
-        return;
-    }
-    if (memcmp(data, "STN", 3) == 0) {
-        // You need to send a packet every 10s
-        enable_until = timer_read32() + 20000;
-    } else {
-        enable_until = 0;
-    }
-}
-
-matrix_row_t last_matrix[MATRIX_ROWS];
-
-void matrix_scan_kb(void) {
-    matrix_scan_user();
-    if (likely(!is_steno_on())) {
-        return;
-    }
-
-    matrix_row_t new_matrix[MATRIX_ROWS];
-
-    for (int row = 0; row < MATRIX_ROWS; row++) {
-        new_matrix[row] = matrix_get_row(row);
-    }
-
-    if (memcmp(new_matrix, last_matrix, sizeof(last_matrix)) == 0) {
-        return;
-    }
-
-    memcpy(last_matrix, new_matrix, sizeof(last_matrix));
-
-    uint8_t buffer[3 + sizeof(new_matrix)];
-    buffer[0] = 'S';
-    buffer[1] = 'T';
-    buffer[2] = 'N';
-    memcpy(buffer + 3, new_matrix, sizeof(new_matrix));
-    raw_hid_send(buffer, sizeof(buffer));
-}
-
-static void send_unicode_chunk(const char * data, size_t length) {
-  uint8_t buffer[7];
-  memset(buffer, 0, sizeof(buffer));
-  buffer[0] = 'U';
-  buffer[1] = 'N';
-  buffer[2] = 'I';
-  memcpy(buffer + 3, data, length);
-  raw_hid_send(buffer, sizeof(buffer));
-}
-
-#define UNI_CHUNKSIZE (RAW_EPSIZE - 3)
-
-/*void send_unicode_string(const char * str) {
-  size_t length = strlen(str);
-  while(length > UNI_CHUNKSIZE) {
-    send_unicode_chunk(str, UNI_CHUNKSIZE);
-    str += UNI_CHUNKSIZE;
-    length -= UNI_CHUNKSIZE;
-  }
-  send_unicode_chunk(str, length);
-}*/
-
-void register_unicode(uint32_t codepoint) {
-  uint8_t buffer[4];
-  size_t size;
-  if(codepoint < 0x80) {
-    buffer[0] = (uint8_t)codepoint;
-    size = 1;
-  } else if(codepoint < 0x800) {
-    buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
-    codepoint >>= 6;
-    buffer[0] = 0xC0 | (uint8_t)(codepoint);
-    size = 2;
-  } else if(codepoint < 0x10000) {
-    buffer[2] = 0x80 | (uint8_t)(codepoint & 0x3F);
-    codepoint >>= 6;
-    buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
-    codepoint >>= 6;
-    buffer[0] = 0xE0 | (uint8_t)(codepoint);
-    size = 3;
-  } else {
-    buffer[3] = 0x80 | (uint8_t)(codepoint & 0x3F);
-    codepoint >>= 6;
-    buffer[2] = 0x80 | (uint8_t)(codepoint & 0x3F);
-    codepoint >>= 6;
-    buffer[1] = 0x80 | (uint8_t)(codepoint & 0x3F);
-    codepoint >>= 6;
-    buffer[0] = 0xF0 | (uint8_t)(codepoint);
-    size = 4;
-  }
-  send_unicode_chunk((char *)buffer, size);
-}
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   track_neo2_modifier_state(keycode, record);
@@ -199,4 +96,3 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
-#endif
