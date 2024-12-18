@@ -22,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB , KC_A   , KC_S   , KC_D       , KC_F   , KC_G        , KC_H   , KC_J       , KC_K      , KC_L   , KC_SCLN , KC_QUOT,
       KC_LSFT, KC_Z   , KC_X   , KC_C       , KC_V   , KC_B        , KC_N   , KC_M       , KC_COMM   , KC_DOT , KC_SLSH , QK_LEAD,
       KC_LCTL, KC_LGUI, KC_LALT, KC_NUBS    , TT(_FN), MO(_SPECIAL), QK_LOCK, TG(_PLOVER), KC_RALT   , KC_RGUI, KC_APP  , KC_RCTL,
-                        KC_CAPS, TT(_GAMING), KC_SPC , KC_LSFT,                            TT(_MOUSE), TT(_NUMPAD), TT(_NAV), TT(_SYS)
+                        KC_CAPS, TT(_NUMPAD), KC_SPC , KC_LSFT,                            TT(_MOUSE), TG(_GAMING), TT(_NAV), TT(_SYS)
   ),
   [_NUMPAD] = LAYOUT(
     _______, _______, _______, _______, _______, _______, _______, KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS, _______,
@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     STN_PLS, STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
     STN_PLS, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                      STN_HAT, STN_HAT, STN_A,   STN_O,                     STN_HAT, STN_HAT, STN_E,   STN_U
+                      STN_HAT, STN_HAT, STN_A,   STN_O,                     STN_HAT, STN_HAT, STN_U,   STN_E
   ),
   [_MOUSE] = LAYOUT(
     _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, _______, _______, KC_BTN3, KC_WH_U, KC_BTN4, _______, _______,
@@ -46,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, _______, _______, _______,                   _______, _______, _______, _______
   ),
   [_GAMING] = LAYOUT(
-    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______,
-    KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, _______,
-    _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, KC_ACL0, KC_ACL1, KC_ACL2, _______, _______,
+    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_F1,   KC_F2,   KC_UP,   KC_F3,   KC_PGUP, KC_F4,
+    KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_F5,   KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_F6,
+    _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_F7,   KC_F8,   KC_BTN4, KC_BTN5, _______, _______,
     _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______, _______, _______, _______, _______,
                       _______, _______, _______, _______,                   _______, _______, _______, _______
   ),
@@ -96,3 +96,41 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+
+// only enough to press a-f
+
+const uint8_t ascii_to_keycode_lut[128] PROGMEM = {
+    // NUL   SOH      STX      ETX      EOT      ENQ      ACK      BEL
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // BS    TAB      LF       VT       FF       CR       SO       SI
+    KC_BSPC, KC_TAB,  KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // DLE   DC1      DC2      DC3      DC4      NAK      SYN      ETB
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // CAN   EM       SUB      ESC      FS       GS       RS       US
+    XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+
+    //       !        "        #        $        %        &        '
+    KC_SPC,  KC_1,    KC_QUOT, KC_3,    KC_4,    KC_5,    KC_7,    KC_QUOT,
+    // (     )        *        +        ,        -        .        /
+    KC_9,    KC_0,    KC_8,    KC_EQL,  KC_COMM, KC_MINS, KC_DOT,  KC_SLSH,
+    // 0     1        2        3        4        5        6        7
+    KC_0,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,
+    // 8     9        :        ;        <        =        >        ?
+    KC_8,    KC_9,    KC_SCLN, KC_SCLN, KC_COMM, KC_EQL,  KC_DOT,  KC_SLSH,
+    // @     A        B        C        D        E        F        G
+    KC_2,    KC_D,    KC_N,    KC_R,    KC_SCLN, KC_F,    KC_O,    KC_G,
+    // H     I        J        K        L        M        N        O
+    KC_H,    KC_I,    KC_J,    KC_K,    KC_L,    KC_M,    KC_N,    KC_O,
+    // P     Q        R        S        T        U        V        W
+    KC_P,    KC_Q,    KC_R,    KC_S,    KC_T,    KC_U,    KC_V,    KC_W,
+    // X     Y        Z        [        \        ]        ^        _
+    KC_X,    KC_Y,    KC_Z,    KC_LBRC, KC_BSLS, KC_RBRC, KC_6,    KC_MINS,
+    // `     a        b        c        d        e        f        g
+    KC_GRV,  KC_D,    KC_N,    KC_R,    KC_SCLN, KC_F,    KC_O,    KC_G,
+    // h     i        j        k        l        m        n        o
+    KC_H,    KC_I,    KC_J,    KC_K,    KC_L,    KC_M,    KC_N,    KC_O,
+    // p     q        r        s        t        u        v        w
+    KC_P,    KC_Q,    KC_R,    KC_S,    KC_T,    KC_U,    KC_V,    KC_W,
+    // x     y        z        {        |        }        ~        DEL
+    KC_X,    KC_Y,    KC_Z,    KC_LBRC, KC_BSLS, KC_RBRC, KC_GRV,  KC_DEL
+};

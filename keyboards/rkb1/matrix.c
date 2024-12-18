@@ -1,6 +1,4 @@
 #include QMK_KEYBOARD_H
-#undef PARAM_ASSERTIONS_ENABLED
-#define PARAM_ASSERTIONS_ENABLED(x) 0
 #include "hardware/pio.h"
 #include "hardware/dma.h"
 #include "hardware/irq.h"
