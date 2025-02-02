@@ -3,9 +3,6 @@
 #pragma once
 
 #ifndef __ASSEMBLER__
-#define _PICO_ASSERT_H
-#include <stdbool.h>
-#include <assert.h>
 #    include "hardware/flash.h"
 #endif
 
