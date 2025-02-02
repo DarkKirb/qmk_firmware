@@ -6,10 +6,6 @@
 #define _PICO_ASSERT_H
 #include <stdbool.h>
 #include <assert.h>
-#define PARAM_ASSERTIONS_ENABLED(x) /* x */
-#define invalid_params_if(x, test) /* x test */
-#define valid_params_if(x, test) /* x test */
-#define hard_assert_if(x, test) /* x test */
 #    include "hardware/flash.h"
 #endif
 

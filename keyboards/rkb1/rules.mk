@@ -16,7 +16,6 @@ CFLAGS += -Wl,--defsym=__unhandled_user_irq=_unhandled_exception
 
 SERIAL_DRIVER = vendor
 
-CAPS_WORD_ENABLE = yes
 KEY_LOCK_ENABLE = yes
 STENO_ENABLE = yes
 STENO_PROTOCOL := geminipr
